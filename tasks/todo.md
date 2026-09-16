@@ -23,6 +23,21 @@
 - [x] Stop mapping `resource_id` onto an explicit empty `path`.
 - [x] Tests, typecheck, docs:generate.
 
+## Observability Evaluations MCP Toolset (2026-09-16)
+
+- [x] Add a separate observability-evaluations toolset without changing the offline AI Evals registry.
+- [x] Expose only scheduled config CRUD; model disable as `enabled: false` update and delete as destructive.
+- [x] Preflight every config write against the selected metric set, supported trace-only runtime, direct LLM judge connector, selector contract, and scorer-valid sampling range.
+- [x] Add isolated registry tests for paths, lifecycle risk policies, rejected unsupported runtime configuration.
+- [x] Run focused and full verification.
+
+### Review
+
+- Corrected rule preflight so omitted optional selectors and sampling use their documented defaults.
+- Require UUID config IDs before constructing scheduled-config get, update, or delete paths.
+- Rejected direct LLM connectors without a secret reference or effective model, because the scoring snapshot would silently omit them.
+- Documented the public `observability-evaluations` toolset and its rule resource in the toolset table.
+- Verification passed: focused tests (14), `pnpm typecheck`, `pnpm build`, generated-doc check, standards (77), and full tests (3,558).
 ## PR Comment Read Guidance and PR Tool Drift (2026-09-14)
 
 - [x] Fix pull request registry drift against the public resource contract.
